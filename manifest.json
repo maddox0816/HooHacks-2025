@@ -6,9 +6,9 @@
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
-        "16": "images/HooHacks2025.png",
-        "48": "images/HooHacks2025.png",
-        "128": "images/HooHacks2025.png"
+        "16": "images/LargeBackground.png",
+        "48": "images/LargeBackground.png",
+        "128": "images/LargeBackground.png"
       }
     }
   }
