@@ -2,9 +2,9 @@
 To help bring awareness to the large environmental impact of AI, this fun chrome extension keeps track of all your AI queries, and compares the energy used to daily experiences
 
 ## To-Do List
-- [] Find energy usage for different AI models
-- [] Integrate website carbon API
-- [] Convert energy usage (kWh) to fun comparisons
+- [ ] Find energy usage for different AI models
+- [ ] Integrate website carbon API
+- [ ] Convert energy usage (kWh) to fun comparisons
 
 ## Energy Comparison Ideas
 - Hours powering a lightbulb 
