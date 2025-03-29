@@ -14,4 +14,7 @@ To help bring awareness to the large environmental impact of AI, this fun chrome
 - Miles driven in a gas-powered car (assuming 25 mpg)
 - Take a ? mile flight
 
+## Links
+- https://www.vox.com/climate/2024/3/28/24111721/climate-ai-tech-energy-demand-rising 
+
 
