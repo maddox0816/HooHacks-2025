@@ -1,15 +1,29 @@
-<!-- popup.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Popup Extension</title>
+  <title>Sustainability Tracker</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Hello, Extension!</h1>
-  <!-- Add more content as needed -->
+  <header>
+    <h1>Sustainability Tracker</h1>
+    <p>Monitor your AI's electricity usage and carbon emissions.</p>
+  </header>
+  <main>
+    <section id="electricity">
+      <h2>Electricity Usage</h2>
+      <p><span id="electricity-usage">0</span> kWh</p>
+    </section>
+    <section id="emissions">
+      <h2>Carbon Emissions</h2>
+      <p><span id="carbon-emissions">0</span> kg CO<sub>2</sub></p>
+    </section>
+  </main>
+  <footer>
+    <p>Powered by AI. Designed for sustainability.</p>
+  </footer>
   <script src="popup.js"></script>
 </body>
 </html>
