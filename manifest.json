@@ -10,5 +10,18 @@
         "48": "images/icon48.png",
         "128": "images/icon128.png"
       }
+    },
+    "content_scripts": [
+        {
+          "js": ["injected.js"],
+          "matches": ["<all_urls>"]
+        }
+    ],
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "background.js"
     }
   }
