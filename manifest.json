@@ -10,5 +10,18 @@
         "48": "images/LargeBackground.png",
         "128": "images/LargeBackground.png"
       }
+    },
+    "content_scripts": [
+        {
+          "js": ["injected.js"],
+          "matches": ["<all_urls>"]
+        }
+    ],
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "background": {
+        "service_worker": "background.js"
     }
   }
