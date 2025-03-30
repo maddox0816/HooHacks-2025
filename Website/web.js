@@ -1,14 +1,12 @@
 // web.js
-var userelectricityUsage = 0;
-var usercarbonEmissions = 0;
-var userQueries = 0;
+
 document.addEventListener('DOMContentLoaded', function () {
 
 
     // Begin by getting emmision and electricity usage data from the storage
     let emissions = 0;
     let electricity = 0;
-    let queries = 0;
+
     //get visits from local storage
     chrome.storage.local.get(['visits'], (result) => {
         console.log('Visits:', result.visits);
@@ -19,14 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
             emissions += visits[i].emissions;
             electricity += visits[i].electricity;
         }
-        chrome.storage.local.get(['aiqueries'], (result) => {
-            console.log('Queries: ',result)
-            let queries = result || 0;
-        })
+
         //update global variables
         userelectricityUsage = electricity;
         usercarbonEmissions = emissions;
-        userQueries = queries;
 
         // Display the emissions and electricity usage in the popup
         document.getElementById('electricity-usage').textContent = electricity.toFixed(6);

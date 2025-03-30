@@ -1,5 +1,4 @@
 // popup.js
-
 document.addEventListener("DOMContentLoaded", async function () {
     const electricityUsageElement = document.getElementById("electricity-usage");
     const carbonEmissionsElement = document.getElementById("carbon-emissions");
@@ -12,16 +11,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         //find the details of the visit that matches the current hostname of the active tab
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            if (tabs.length === 0 || !tabs[0].url){
-                console.log("No active Tab")
-                return;
-            }
             const currentHostname = new URL(tabs[0].url).hostname;
             let visitDetails = visits.find(visit => visit.hostname === currentHostname);
             console.log('Visit Details:', visitDetails);
 
             if (visitDetails) {
-                electricityUsageElement.textContent = visitDetails.electricity.toFixed(6);
+                electricityUsageElement.textContent = visitDetails.electricity.toFixed(2);
                 carbonEmissionsElement.textContent = visitDetails.emissions.toFixed(2);
                 ratingElement.textContent = visitDetails.rating;
 
@@ -40,16 +35,17 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }, 500);
 
                 setTimeout(() => {
-                    clearInterval(loadingAnimation);
-                    window.location.reload();
+                    this.location.reload();
                 }, 2000); // Stop animation after 2 seconds
+
+
+
             }
         });
-
-
+        
         let visitDetails = visits.find(visit => visit.hostname === currentHostname);
         console.log('Visit Details:', visitDetails);
-
+    
     });
 
 });
