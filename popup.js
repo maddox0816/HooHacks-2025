@@ -46,7 +46,3 @@ document.addEventListener("DOMContentLoaded", async function () {
         
         let visitDetails = visits.find(visit => visit.hostname === currentHostname);
         console.log('Visit Details:', visitDetails);
-    
-    });
-
-});

@@ -4,11 +4,6 @@ var usercarbonEmissions = 0;
 document.addEventListener('DOMContentLoaded', function () {
 
 
-    function updateComparisons(){
-        document.getElementById("electricity-usage").textContent = "10";
-    }
-
-
     // Begin by getting emmision and electricity usage data from the storage
     let emissions = 0;
     let electricity = 0;
