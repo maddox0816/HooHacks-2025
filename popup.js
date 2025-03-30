@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log('Visit Details:', visitDetails);
 
             if (visitDetails) {
-                electricityUsageElement.textContent = visitDetails.electricity.toFixed(2);
-                carbonEmissionsElement.textContent = visitDetails.emissions.toFixed(2);
+                electricityUsageElement.textContent = visitDetails.electricity.toFixed(6);
+                carbonEmissionsElement.textContent = visitDetails.emissions.toFixed(6);
                 ratingElement.textContent = visitDetails.rating;
 
             } else {
