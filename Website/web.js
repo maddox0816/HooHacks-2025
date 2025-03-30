@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         usercarbonEmissions = emissions;
 
         // Display the emissions and electricity usage in the popup
-        document.getElementById('electricity-usage').textContent = electricity.toFixed(2);
+        document.getElementById('electricity-usage').textContent = electricity.toFixed(6);
         document.getElementById('carbon-emissions').textContent = emissions.toFixed(2);
         //update comparisons
         calculateNumOfiPhoneCharges(electricity);
@@ -30,8 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function calculateNumOfiPhoneCharges(electricityUsageElement) {
         console.log("Calculating number of iPhone charges...");
-        console.log("Electricity used:", electricity);
-        const iPhoneChargesElement = document.getElementById("iPhone-Charges");
+        console.log("Electricity used:", electricityUsageElement);
         const numiPhoneChargesElement = electricityUsageElement * 0.0178;
 
         //Display number of iPhone Charges
