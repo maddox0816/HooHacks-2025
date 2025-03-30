@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         //find the details of the visit that matches the current hostname of the active tab
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            if (tabs.length === 0 || !tabs[0].url){
+                console.log("No active Tab")
+                return;
+            }
             const currentHostname = new URL(tabs[0].url).hostname;
             let visitDetails = visits.find(visit => visit.hostname === currentHostname);
             console.log('Visit Details:', visitDetails);
@@ -36,14 +40,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }, 500);
 
                 setTimeout(() => {
-                    this.location.reload();
+                    clearInterval(loadingAnimation);
+                    window.location.reload();
                 }, 2000); // Stop animation after 2 seconds
             }
         });
-        
-        let visitDetails = visits.find(visit => visit.hostname === currentHostname);
-        console.log('Visit Details:', visitDetails);
-    
+
     });
 
 });

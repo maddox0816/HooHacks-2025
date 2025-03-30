@@ -27,5 +27,10 @@ if $n$ is the total number of kWh used by the user
 ## Links
 - https://www.vox.com/climate/2024/3/28/24111721/climate-ai-tech-energy-demand-rising 
 - https://arxiv.org/pdf/2304.03271 (p2 for water consumption data)
-
-
+## Image Links
+- Energy-Image: [https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngtree.com%2Fso%2Fenergy-bolt-clipart&psig=AOvVaw1sGP3wqVjELpUkK37IJN6z&ust=1743431195077000&source=images&cd=vfe&opi=89978449&ved=0CBcQjhxqFwoTCKiI-LqBsowDFQAAAAAdAAAAABAE](https://pngtree.com/freepng/blue-energy-bolt-icon_8063175.html) 
+-  Extension Logo: https://www.canva.com/design/DAGjInlvpm0/uTau2EtBks0s65WFikHxhA/view?utm_content=DAGjInlvpm0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h791fb49a4a
+-  iphone-image: https://pngtree.com/freepng/phone-charging-with-shadow-on-a-blue-background_8062795.html
+-  HooHacks Logo: from DevPost website: https://www.google.com/url?sa=i&url=https%3A%2F%2Fhoohacks-2024.devpost.com%2F&psig=AOvVaw0DhYr9zsRd_EdIY_l6_Ldl&ust=1743430467085000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOi7-9_-sYwDFQAAAAAdAAAAABAE 
+- google search image: https://pngtree.com/freepng/google-search-barlight-blue-base-color-png_7771019.html
+- carbon emissions image: https://pngtree.com/freepng/co2-carbon-dioxide-logo-vector-design_7921595.html 
