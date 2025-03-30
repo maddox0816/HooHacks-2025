@@ -13,7 +13,7 @@
     },
     "content_scripts": [
         {
-          "js": ["injected.js"],
+          "js": ["googleTest.js"],
           "matches": ["<all_urls>"]
         }
     ],
