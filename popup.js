@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (tabs.length === 0) return;
         const url = tabs[0].url; // Should directly use URL
 
+        // URL in the console
+        console.log("Current URL: " + url);
+
+        //Encode URL for the API use
+        const encodedUrl = encodeURIComponent(url);
+
         // Fetch CO2 emissions and kWh usage from Website Carbon API
         try {
             const response = await fetch(`https://api.websitecarbon.com/site?url=${url}`);
@@ -21,8 +27,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             const energyKWh = data.statistics.energy; // Energy in kWh
             const co2Grams = data.statistics.co2.grid.grams; // CO2 in grams
 
-            electricityUsageElement.textContent = (energyKWh * 1000).toFixed(4); // Convert to Wh
-            carbonEmissionsElement.textContent = (co2Grams / 1000).toFixed(4); // Convert to kg
+            electricityUsageElement.textContent = (energyKWh * 1000).toFixed(10); // Convert to Wh
+            carbonEmissionsElement.textContent = (co2Grams / 1000).toFixed(10); // Convert to kg
         } catch (error) {
             console.error("Error fetching data:", error);
             electricityUsageElement.textContent = "Data unavailable";
