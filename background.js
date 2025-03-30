@@ -14,4 +14,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             });
         });
     }
+    if( message.type === 'NEW_VISIT') {
+        // Handle new visit message
+        console.log('New visit:', message.hostname, message.seconds, message.date);
+    }
 });
