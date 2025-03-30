@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('Popup loaded successfully!');
 
    //make button a link
-    document.getElementById('emission-breakdown-button').addEventListener('click', function() {
+    document.getElementById('emission-breakdown-button').addEventListener('click', function()
+    {
         window.open('http://chatgpt.com', '_blank');
     });
 
