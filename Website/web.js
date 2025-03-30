@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('carbon-emissions').textContent = emissions.toFixed(2);
         //update comparisons
         calculateNumOfiPhoneCharges(electricity);
+        calculateNumOfRegularGoogleCharges(electricity);
     })
 
     function calculateNumOfiPhoneCharges(electricityUsageElement) {
@@ -36,4 +37,17 @@ document.addEventListener('DOMContentLoaded', function () {
         //Display number of iPhone Charges
         document.getElementById('iPhone-Charges').textContent = numiPhoneChargesElement.toFixed(2);
     }
+
+    function calculateNumOfRegularGoogleCharges(electricityUsageElement)
+    {
+        console.log("Calculating number of Regular Google Searches...");
+        console.log("Electricity used:", electricity);
+        const regGoogleSearchesid = document.getElementById("reg-google-searches");
+        const numRegGoogleSearchesElement = electricityUsageElement * 0.00003;
+
+        //Display number of iPhone Charges
+        document.getElementById('reg-google-searches').textContent = numRegGoogleSearchesElement.toFixed(2);
+    }
+
 });
+

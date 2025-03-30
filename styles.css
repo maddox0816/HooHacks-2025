@@ -3,12 +3,12 @@ body {
   text-align: center;
   padding: 20px;
   margin: 0;
-  background-color: #7a4d0a;
+  background-color: #008de8;
   color: #000000;
 }
 
 header {
-  background-color: #105e0b;
+  background-color: #010370;
   color: white;
   padding: 20px;
   border-radius: 8px;
@@ -31,7 +31,7 @@ main {
 section {
   margin: 20px 0;
   padding: 15px;
-  background-color: #e18600;
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -67,5 +67,5 @@ footer {
 }
 
 .button-breakdown{
-  background-color: #e18600;
+  background-color: #000be1;
 }
