@@ -13,7 +13,7 @@
     },
     "content_scripts": [
         {
-          "js": ["googleTest.js"],
+          "js": ["googleTest.js","listeners.js"],
           "matches": ["<all_urls>"]
         }
     ],
