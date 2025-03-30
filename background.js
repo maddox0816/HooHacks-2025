@@ -97,7 +97,7 @@ async function getURLDetails(url){
         const co2Grams = data.statistics.co2.grid.grams; // CO2 in grams
         rating = data.rating; // Rating
 
-        electricityUsage = (energyKWh).toFixed(10); 
+        electricityUsage = (energyKWh).toFixed(6);
         carbonEmissions = (co2Grams ).toFixed(10);
     } catch (error) {
         console.error("Error fetching data:", error);

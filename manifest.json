@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Sustanible Me!",
+    "name": "Sustainable Me!",
     "version": "1.0",
     "description": "A Chrome extension that helps you track your carbon footprint and make more sustainable choices.",
     "action": {

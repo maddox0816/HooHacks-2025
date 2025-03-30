@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log('Visit Details:', visitDetails);
 
             if (visitDetails) {
-                electricityUsageElement.textContent = visitDetails.electricity.toFixed(2);
+                electricityUsageElement.textContent = visitDetails.electricity.toFixed(6);
                 carbonEmissionsElement.textContent = visitDetails.emissions.toFixed(2);
                 ratingElement.textContent = visitDetails.rating;
 
@@ -38,9 +38,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 setTimeout(() => {
                     this.location.reload();
                 }, 2000); // Stop animation after 2 seconds
-
-
-
             }
         });
         
