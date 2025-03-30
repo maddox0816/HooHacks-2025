@@ -1,21 +1,17 @@
-// Listen for messages from other parts of the extension or webpage
+// Listen for messages from the content script
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === 'updateSaveData') {
-        // Assuming message.data contains the new save data
-        const newSaveData = message.data;
+    if (message.type === 'INCREMENT_COUNTER') {
+        // Get the current counter from local storage
+        chrome.storage.local.get(['searchCounter'], (result) => {
+            let counter = result.searchCounter || 0;
 
-        // Save the data to Chrome's storage
-        chrome.storage.local.set({ saveData: newSaveData }, () => {
-            if (chrome.runtime.lastError) {
-                console.error('Error saving data:', chrome.runtime.lastError);
-                sendResponse({ success: false, error: chrome.runtime.lastError });
-            } else {
-                console.log('Save data updated successfully');
-                sendResponse({ success: true });
-            }
+            // Increment the counter
+            counter++;
+
+            // Save the updated counter back to local storage
+            chrome.storage.local.set({ searchCounter: counter }, () => {
+                console.log(`Search counter updated: ${counter}`);
+            });
         });
-
-        // Return true to indicate that the response will be sent asynchronously
-        return true;
     }
 });
