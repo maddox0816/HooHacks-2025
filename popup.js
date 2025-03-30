@@ -3,36 +3,34 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const electricityUsageElement = document.getElementById("electricity-usage");
     const carbonEmissionsElement = document.getElementById("carbon-emissions");
+    const ratingElement = document.getElementById("carbon-rating-value");
 
-    // Get the current active tab
-    chrome.tabs.query({ active: true, currentWindow: true }, async function (tabs) {
-        if (tabs.length === 0) return;
-        const url = tabs[0].url; // Should directly use URL
+    //get visits from local storage
+    chrome.storage.local.get(['visits'], (result) => {
+        console.log('Visits:', result.visits);
+        let visits = result.visits || [];
 
-        // URL in the console
-        console.log("Current URL: " + url);
+        //find the details of the visit that matches the current hostname of the active tab
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            const currentHostname = new URL(tabs[0].url).hostname;
+            let visitDetails = visits.find(visit => visit.hostname === currentHostname);
+            console.log('Visit Details:', visitDetails);
 
-        //Encode URL for the API use
-        const encodedUrl = encodeURIComponent(url);
+            if (visitDetails) {
+                electricityUsageElement.textContent = visitDetails.electricity.toFixed(2);
+                carbonEmissionsElement.textContent = visitDetails.emissions.toFixed(2);
+                ratingElement.textContent = visitDetails.rating;
 
-        // Fetch CO2 emissions and kWh usage from Website Carbon API
-        try {
-            const response = await fetch(`https://api.websitecarbon.com/site?url=${url}`);
-            const data = await response.json();
-
-            // Log the full API response to the console
-            console.log("API Response:", data);
-
-            // Extract energy and CO2 data
-            const energyKWh = data.statistics.energy; // Energy in kWh
-            const co2Grams = data.statistics.co2.grid.grams; // CO2 in grams
-
-            electricityUsageElement.textContent = (energyKWh * 1000).toFixed(10); // Convert to Wh
-            carbonEmissionsElement.textContent = (co2Grams / 1000).toFixed(10); // Convert to kg
-        } catch (error) {
-            console.error("Error fetching data:", error);
-            electricityUsageElement.textContent = "Data unavailable";
-            carbonEmissionsElement.textContent = "Data unavailable";
-        }
+            } else {
+                electricityUsageElement.textContent = "Data unavailable";
+                carbonEmissionsElement.textContent = "Data unavailable";
+                ratingElement.textContent = "N/A";
+            }
+        });
+        
+        let visitDetails = visits.find(visit => visit.hostname === currentHostname);
+        console.log('Visit Details:', visitDetails);
+    
     });
+
 });

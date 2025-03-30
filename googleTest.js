@@ -2,18 +2,24 @@ console.log("Background script loaded and listening for messages.");
 //wait for dom to load
 function onDomLoaded(){
     console.log("DOM fully loaded");
-    //get the size of data used to load the tab
-    var dataSize = performance.getEntriesByType("navigation")[0].transferSize;
-    console.log("Data size:", dataSize);
 
-    chrome.runtime.sendMessage({ type: 'NEW_VISIT', hostname: window.location.hostname, date: new Date().toISOString(), dataSize: dataSize }, function (response) {
-        console.log('Response from background script:', response);
-    });
+    //pass url to service worker to do its thing    
+
+    chrome.runtime.sendMessage({ type: 'NEW_VISIT', hostname: window.location.hostname}, function(response) {
+        console.log("Response from background script:", response);
+        if(response.status === 'success'){
+            console.log("Data saved successfully:", response.data);
+            //update comparisons
+            updateComparisons(response.data);
+        }else{
+            console.log("Error saving data:", response.message);
+        }
+    }
+    );
     
-
-    console.log("Message sent to background script with dataSize:", dataSize);
-
 }
+
+
 
 
 if(document.readyState === 'loading') {
@@ -25,5 +31,6 @@ if(document.readyState === 'loading') {
 } else {
 
     onDomLoaded();
+    console.log("DOM was already loaded, calling onDomLoaded directly.");
 }
 
