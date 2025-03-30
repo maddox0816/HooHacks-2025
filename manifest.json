@@ -13,13 +13,15 @@
     },
     "content_scripts": [
         {
-          "js": ["googleTest.js"],
+          "js": ["googleTest.js","listeners.js"],
           "matches": ["<all_urls>"]
         }
     ],
     "permissions": [
         "activeTab",
-        "storage"
+        "storage",
+        "scripting",
+        "tabs"
     ],
     "background": {
         "service_worker": "background.js"

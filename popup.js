@@ -2,14 +2,28 @@
 var userelectricityUsage = 0;
 var usercarbonEmissions = 0;
 document.addEventListener('DOMContentLoaded', function () {
-    // Add your popup logic here
+    // Begin by getting emmision and electricity usage data from the storage
+    let emmisions = 0;
+    let electricity = 0;
+    //get visits from local storage
+    chrome.storage.local.get(['visits'], (result) => {
+        console.log('Visits:', result.visits);
+        let visits = result.visits || [];
+
+        // Loop through the visits and add up the emissions and electricity usage
+        for (let i = 0; i < visits.length; i++) {
+            emmisions += visits[i].emissions;
+            electricity += visits[i].electricity;
+        }
+
+        // Display the emissions and electricity usage in the popup
+        document.getElementById('electricity-usage').textContent = electricity.toFixed(2);
+        document.getElementById('carbon-emissions').textContent = emmisions.toFixed(2);
+       
+    });
+    
 
     
-    
-
-    function updateComparisons(){
-      document.getElementById("electricity-usage").textContent = "10";
-    }
 
    //make button a link
     document.getElementById('emission-breakdown-button').addEventListener('click', function()
