@@ -32,4 +32,5 @@ if $n$ is the total number of kWh used by the user
 -  Extension Logo: https://www.canva.com/design/DAGjInlvpm0/uTau2EtBks0s65WFikHxhA/view?utm_content=DAGjInlvpm0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h791fb49a4a
 -  iphone-image: https://pngtree.com/freepng/phone-charging-with-shadow-on-a-blue-background_8062795.html
 -  HooHacks Logo: from DevPost website: https://www.google.com/url?sa=i&url=https%3A%2F%2Fhoohacks-2024.devpost.com%2F&psig=AOvVaw0DhYr9zsRd_EdIY_l6_Ldl&ust=1743430467085000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOi7-9_-sYwDFQAAAAAdAAAAABAE 
-
+- google search image: https://pngtree.com/freepng/google-search-barlight-blue-base-color-png_7771019.html
+- carbon emissions image: https://pngtree.com/freepng/co2-carbon-dioxide-logo-vector-design_7921595.html 
