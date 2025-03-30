@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
    //make button a link
     document.getElementById('emission-breakdown-button').addEventListener('click', function()
     {
-        window.open('http://chatgpt.com', '_blank');
+        window.open('Website/index.html', '_blank');
     });
 
     function getActiveTabURL(callback) {
