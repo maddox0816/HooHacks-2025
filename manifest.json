@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Popup Extension",
+    "name": "Sustanible Me!",
     "version": "1.0",
-    "description": "A simple Chrome extension with a popup",
+    "description": "A Chrome extension that helps you track your carbon footprint and make more sustainable choices.",
     "action": {
       "default_popup": "popup.html",
       "default_icon": {

@@ -2,39 +2,110 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if( message.type === 'NEW_VISIT') {
         // Handle new visit message
-        console.log('New visit:', message.hostname, message.date);
+        console.log('New visit:', message.hostname);
+        let time = new Date().toISOString(); // Get current date and time in ISO format
 
-        // Convert data size (bytes) to gigabytes (GB)
-        let dataSizeInGB = message.dataSize / (1024 * 1024 * 1024); // Convert bytes to GB
+        tempData = getURLDetails(message.hostname);
+        //turn promise into values
+        tempData.then((tempData) => {
+            console.log("DATA ARRIVED!");
+            console.log("Temp data:", tempData);
+            let TempelectricityUsed = tempData[0]; // Get electricity used from the tempData array
+            let TempemissionsCO2 = tempData[1]; // Get emissions from the tempData array
+            let rating = tempData[2]; // Get rating from the tempData array
+            let electricityUsed, emissionsCO2;
+            
+            if(TempelectricityUsed === "Data unavailable" || TempemissionsCO2 === "Data unavailable"){
+                console.log("Data unavailable, not saving visit.");
+                sendResponse({ status: 'error', message: 'Data unavailable' });
+                return;
+            }else{
+                console.log("Data available, saving visit.");
+            }
 
-        // Estimate electricity usage (kWh) based on data size
-        let electricityUsed = 50000000 * dataSizeInGB; // 5 kWh per GB of data transferred
+            //turn them back into numbers
+            if(TempelectricityUsed !== "Data unavailable" && TempemissionsCO2 !== "Data unavailable"){
+                console.log("Data available, converting to numbers.");
+                electricityUsed = parseFloat(TempelectricityUsed);
+                emissionsCO2 = parseFloat(TempemissionsCO2);
+            }
+            console.log("Electricity used:", electricityUsed);
+            console.log("Emissions CO2:", emissionsCO2);
+            
+            
+            //create a list of the hostname, seconds, emissions, electricity, and date
+            let visitData = {
+                date: time,
+                electricity: electricityUsed,
+                emissions: emissionsCO2,
+                hostname: message.hostname,
+                rating: rating,
+            };
 
-        // Calculate emissions based on electricity used
-        let emissions = 31.7500000 * electricityUsed; // kg CO2 (assuming 0.3175 kg CO2 per kWh)
 
-        
-        
-        //create a list of the hostname, seconds, emissions, electricity, and date
-        let visitData = {
-            date: message.date,
-            electricity: electricityUsed,
-            emissions: emissions,
-            hostname: message.hostname,
-        };
+            console.log("Visit data to be saved:", visitData);
 
-        //append to the list of lists in chrome.storage.local
-        chrome.storage.local.get(['visits'], (result) => {
-            let visits = result.visits || [];
-            visits.push(visitData);
-            console.log('Visits:', visits);
+            //append to the list of lists in chrome.storage.local
+            chrome.storage.local.get(['visits'], (result) => {
+                let visits = result.visits || [];
+                visits.push(visitData);
+                console.log('Visits:', visits);
 
-            // Save the updated visits back to local storage
-            chrome.storage.local.set({ visits: visits }, () => {
-                console.log('Visits updated:', visits);
-                sendResponse({ status: 'success', data: visits });
+                // Save the updated visits back to local storage
+                chrome.storage.local.set({ visits: visits }, () => {
+                    console.log('Visits updated:', visits);
+                    sendResponse({ status: 'success', data: visits });
+                });
             });
         });
         
+        return true;
+    }else if (message.type === 'LOADING') {
+        chrome.storage.local.set({ status: 'loading' }, () => {
+            console.log('Status set to loading');
+        });
+        sendResponse({ status: 'success', message: 'Loading status set' });
+
+    }else if( message.type === 'LOADED') {
+        chrome.storage.local.set({ status: 'loaded' }, () => {
+            console.log('Status set to loaded');
+        });
+        sendResponse({ status: 'success', message: 'Loaded status set' });
     }
 });
+
+async function getURLDetails(url){
+    let electricityUsage = 0;
+    let carbonEmissions = 0;
+    let rating = 'F'; // Default rating
+    // URL in the console
+    console.log("Current URL: " + url);
+
+    //Encode URL for the API use
+    const encodedUrl = encodeURIComponent(url);
+
+    // Fetch CO2 emissions and kWh usage from Website Carbon API
+    try {
+        const response = await fetch(`https://api.websitecarbon.com/site?url=${encodedUrl}`);
+        const data = await response.json();
+
+        // Log the full API response to the console
+        console.log("API Response:", data);
+
+        // Extract data
+        const energyKWh = data.statistics.energy; // Energy in kWh
+        const co2Grams = data.statistics.co2.grid.grams; // CO2 in grams
+        rating = data.rating; // Rating
+
+        electricityUsage = (energyKWh * 1000).toFixed(10); // Convert to Wh
+        carbonEmissions = (co2Grams ).toFixed(10);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        electricityUsage = "Data unavailable";
+        carbonEmissions = "Data unavailable";
+        rating = "Data unavailable";
+    }
+    let data = [electricityUsage, carbonEmissions, rating];
+    console.log("Data:", data);
+    return data;
+}
