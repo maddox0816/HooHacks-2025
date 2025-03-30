@@ -1,5 +1,9 @@
+console.log(document.title);
+
 document.addEventListener('DOMContentLoaded', () => {
-    const searchButton = document.querySelector('input[name="btnK"]'); // The search button on Google
+ 
+    const searchButton = window.document.getElementsByClassName("gNO89b");
+    console.log("Search Button: " + searchButton);
 
     if (searchButton) {
         searchButton.addEventListener('click', () => {
