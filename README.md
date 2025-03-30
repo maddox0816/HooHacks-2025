@@ -4,16 +4,17 @@ To help bring awareness to the large environmental impact of AI, this fun chrome
 ## To-Do List
 - [ ] Find energy usage for different AI models
 - [ ] Integrate website carbon API
-- [ ] Convert energy usage (kWh) to fun comparisons
+- [x] Convert energy usage (kWh) to fun comparisons
+- [ ] FIGURE OUT HOW TO READ BUTTON PRESSES ON THE CHATGPT WEBSITE
 
 ## Energy Comparison Ideas
 if $n$ is the total number of kWh used by the user
-- Hours powering an low-powered (8W) LED lightbulb - (1 hr / 0.06 kW)*($n$ kW)
+- Hours powering a lightbulb - (1 hr / 0.06 kW)*($n$ kW)
 - Charge iPhone 16 ? number of times (0.0178 kWh per full charge)
 - Laptop charge
 - ? number of regular google searches (0.00003 kWh per search)
 - Drive a Tesla ? number of miles
-- Watch TV for ? hours
+- Watch TV for ? hours 
 
 - Amount of water consumed - 500ml / 50 prompts = 10ml/prompt = 0.338oz / prompt
     - 16.9 oz/bottle --> **0.02 bottles per prompt**
