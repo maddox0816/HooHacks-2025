@@ -11,6 +11,20 @@ function makeDrewHappy(){
 }
 
 
+function addChatGPTListener() {
+    console.log("Adding ChatGPT listener...");
+    document.addEventListener('click', function(event) {
+        const button = event.target.closest('[data-testid="send-button"]'); // Adjust the selector to match your button class
+        if(button){
+            console.log('Button clicked:', button); // Log the clicked button
+            if(button.getAttribute('data-testid') === 'send-button'){
+                console.log('ChatGPT button clicked!');
+                alert('ChatGPT button clicked!');
+            }
+        }
+    });
+}
+
 
 
 if(document.readyState === 'loading') {
@@ -18,7 +32,9 @@ if(document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
         console.log("DOM fully loaded and parsed");
         makeDrewHappy();
+        addChatGPTListener();
     });
 } else {
     makeDrewHappy();
+    addChatGPTListener();
 }
