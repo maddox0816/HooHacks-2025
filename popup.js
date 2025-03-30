@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById("electricity-usage").textContent = "10";
     }
 
+   //make button a link
+    document.getElementById('emission-breakdown-button').addEventListener('click', function()
+    {
+        window.open('http://chatgpt.com', '_blank');
+    });
+
     function getActiveTabURL(callback) {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             if (tabs.length > 0) {
