@@ -8,10 +8,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         let dataSizeInGB = message.dataSize / (1024 * 1024 * 1024); // Convert bytes to GB
 
         // Estimate electricity usage (kWh) based on data size
-        let electricityUsed = 5 * dataSizeInGB; // 5 kWh per GB of data transferred
+        let electricityUsed = 50000000 * dataSizeInGB; // 5 kWh per GB of data transferred
 
         // Calculate emissions based on electricity used
-        let emissions = 0.3175 * electricityUsed; // kg CO2 (assuming 0.3175 kg CO2 per kWh)
+        let emissions = 31.7500000 * electricityUsed; // kg CO2 (assuming 0.3175 kg CO2 per kWh)
 
         
         
