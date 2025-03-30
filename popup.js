@@ -1,51 +1,41 @@
 // popup.js
+
 document.addEventListener("DOMContentLoaded", async function () {
     const electricityUsageElement = document.getElementById("electricity-usage");
     const carbonEmissionsElement = document.getElementById("carbon-emissions");
-    const ratingElement = document.getElementById("carbon-rating-value");
+    const carbonRatingElement = document.getElementById("carbon-rating-value")
 
-    //get visits from local storage
-    chrome.storage.local.get(['visits'], (result) => {
-        console.log('Visits:', result.visits);
-        let visits = result.visits || [];
+    // Get the current active tab
+    chrome.tabs.query({ active: true, currentWindow: true }, async function (tabs) {
+        if (tabs.length === 0) return;
+        const url = tabs[0].url; // Should directly use URL
 
-        //find the details of the visit that matches the current hostname of the active tab
-        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            const currentHostname = new URL(tabs[0].url).hostname;
-            let visitDetails = visits.find(visit => visit.hostname === currentHostname);
-            console.log('Visit Details:', visitDetails);
+        // URL in the console
+        console.log("Current URL: " + url);
 
-            if (visitDetails) {
-                electricityUsageElement.textContent = visitDetails.electricity.toFixed(6);
-                carbonEmissionsElement.textContent = visitDetails.emissions.toFixed(6);
-                ratingElement.textContent = visitDetails.rating;
+        //Encode URL for the API use
+        const encodedUrl = encodeURIComponent(url);
 
-            } else {
-                //refresh page if no visit details are found
-                console.log("No visit details found for this hostname.");
-                ratingElement.textContent = "N/A";
-                //do a fancy. then .. then ... in the text
-                let dots = 0;
-                const loadingAnimation = setInterval(() => {
-                    dots = (dots + 1) % 4; // Cycle between 0, 1, 2, 3
-                    const dotsText = ".".repeat(dots);
-                    electricityUsageElement.textContent = dotsText;
-                    carbonEmissionsElement.textContent = dotsText;
-                    ratingElement.textContent = "N/A";
-                }, 500);
+        // Fetch CO2 emissions and kWh usage from Website Carbon API
+        try {
+            const response = await fetch(`https://api.websitecarbon.com/site?url=${url}`);
+            const data = await response.json();
 
-                setTimeout(() => {
-                    this.location.reload();
-                }, 2000); // Stop animation after 2 seconds
+            // Log the full API response to the console
+            console.log("API Response:", data);
 
+            // Extract energy and CO2 data
+            const energyKWh = data.statistics.energy; // Energy in kWh
+            const co2Grams = data.statistics.co2.grid.grams; // CO2 in grams
+            const carbonRatingValue = data.rating; // Grade from F to A+
 
-
-            }
-        });
-        
-        let visitDetails = visits.find(visit => visit.hostname === currentHostname);
-        console.log('Visit Details:', visitDetails);
-    
+            electricityUsageElement.textContent = (energyKWh * 1000).toFixed(10); // Convert to Wh
+            carbonEmissionsElement.textContent = (co2Grams / 1000).toFixed(10); // Convert to kg
+            carbonRatingElement.textContent = carbonRatingValue;
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            electricityUsageElement.textContent = "Data unavailable";
+            carbonEmissionsElement.textContent = "Data unavailable";
+        }
     });
-
 });
