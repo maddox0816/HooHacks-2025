@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Begin by getting emmision and electricity usage data from the storage
-    let emmisions = 0;
+    let emissions = 0;
     let electricity = 0;
     //get visits from local storage
     chrome.storage.local.get(['visits'], (result) => {
@@ -19,16 +19,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Loop through the visits and add up the emissions and electricity usage
         for (let i = 0; i < visits.length; i++) {
-            emmisions += visits[i].emissions;
+            emissions += visits[i].emissions;
             electricity += visits[i].electricity;
         }
         //update global variables
         userelectricityUsage = electricity;
-        usercarbonEmissions = emmisions;
+        usercarbonEmissions = emissions;
 
         // Display the emissions and electricity usage in the popup
         document.getElementById('electricity-usage').textContent = electricity.toFixed(2);
-        document.getElementById('carbon-emissions').textContent = emmisions.toFixed(2);
+        document.getElementById('carbon-emissions').textContent = emissions.toFixed(2);
         //update comparisons
         calculateNumOfiPhoneCharges(electricity);
     })
