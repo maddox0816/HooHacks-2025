@@ -4,15 +4,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // Handle new visit message
         console.log('New visit:', message.hostname, message.date);
 
-        let electircityUsed = 0.6 * message.dataSize; // kWh
-        // Example calculation for emissions based on electricity used
-        let emissions = 0.3175 * electircityUsed; // kg CO2 (assuming 0.3175 kg CO2 per kWh)
-        console.log('Electricity used:', electircityUsed, 'kWh');
+        // Convert data size (bytes) to gigabytes (GB)
+        let dataSizeInGB = message.dataSize / (1024 * 1024 * 1024); // Convert bytes to GB
+
+        // Estimate electricity usage (kWh) based on data size
+        let electricityUsed = 50000000 * dataSizeInGB; // 5 kWh per GB of data transferred
+
+        // Calculate emissions based on electricity used
+        let emissions = 31.7500000 * electricityUsed; // kg CO2 (assuming 0.3175 kg CO2 per kWh)
+
+        
         
         //create a list of the hostname, seconds, emissions, electricity, and date
         let visitData = {
             date: message.date,
-            electricity: electircityUsed,
+            electricity: electricityUsed,
             emissions: emissions,
             hostname: message.hostname,
         };
