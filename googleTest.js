@@ -7,7 +7,7 @@ function onDomLoaded(){
     console.log("Data size:", dataSize);
 
     chrome.runtime.sendMessage({ type: 'NEW_VISIT', hostname: window.location.hostname, date: new Date().toISOString(), dataSize: dataSize }, function (response) {
-        console.log('Response from background script:', response.data);
+        console.log('Response from background script:', response);
     });
     
 
