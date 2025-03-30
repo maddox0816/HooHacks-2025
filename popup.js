@@ -22,9 +22,25 @@ document.addEventListener("DOMContentLoaded", async function () {
                 ratingElement.textContent = visitDetails.rating;
 
             } else {
-                electricityUsageElement.textContent = "Data unavailable";
-                carbonEmissionsElement.textContent = "Data unavailable";
+                //refresh page if no visit details are found
+                console.log("No visit details found for this hostname.");
                 ratingElement.textContent = "N/A";
+                //do a fancy. then .. then ... in the text
+                let dots = 0;
+                const loadingAnimation = setInterval(() => {
+                    dots = (dots + 1) % 4; // Cycle between 0, 1, 2, 3
+                    const dotsText = ".".repeat(dots);
+                    electricityUsageElement.textContent = dotsText;
+                    carbonEmissionsElement.textContent = dotsText;
+                    ratingElement.textContent = "N/A";
+                }, 500);
+
+                setTimeout(() => {
+                    this.location.reload();
+                }, 2000); // Stop animation after 3 seconds
+
+
+
             }
         });
         

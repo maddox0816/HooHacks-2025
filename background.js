@@ -60,6 +60,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         });
         
         return true;
+    }else if (message.type === 'LOADING') {
+        chrome.storage.local.set({ status: 'loading' }, () => {
+            console.log('Status set to loading');
+        });
+        sendResponse({ status: 'success', message: 'Loading status set' });
+
+    }else if( message.type === 'LOADED') {
+        chrome.storage.local.set({ status: 'loaded' }, () => {
+            console.log('Status set to loaded');
+        });
+        sendResponse({ status: 'success', message: 'Loaded status set' });
     }
 });
 
