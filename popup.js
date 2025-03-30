@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const electricityUsageElement = document.getElementById("electricity-usage");
     const carbonEmissionsElement = document.getElementById("carbon-emissions");
-    const carbonRatingElement = document.getElementById("carbon-rating-value")
+    const carbonRatingElement = document.getElementById("carbon-rating-value");
 
     // Get the current active tab
     chrome.tabs.query({ active: true, currentWindow: true }, async function (tabs) {
